@@ -1,0 +1,13 @@
+name: Coupon Codes
+main: com.lala.CouponCodes.CouponCodes
+version: 1.5
+author: 'LaLa'
+commands:
+    coupon:
+        description: Coupon
+        usage: |
+               /<command>
+    c:
+        description: Coupon
+        usage: |
+               /<command>
