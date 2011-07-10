@@ -16,11 +16,18 @@ import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
 
 public class CouponCodes extends JavaPlugin{
+	/**
+	 * @author LaLa
+	 * This is CouponCodes v2.0
+	 * More like v0.0.0.0.1
+	 * (rewriting entire plugin!)
+	 */
 	private final Coupon c = new Coupon(this);	
 	public static PermissionHandler permissionsHandler;
 	public static File data;
 	public iConomy iConomy = null;
 	boolean p;
+	boolean op;
 	public void onEnable(){
     	PluginDescriptionFile pdfFile = getDescription();    	
     	getCommand("coupon").setExecutor(c);
@@ -31,7 +38,7 @@ public class CouponCodes extends JavaPlugin{
         getServer().getPluginManager().registerEvent(Type.PLUGIN_DISABLE, new server(this), Priority.Monitor, this);
         checkiConomy();
         PluginConfig.loadSettings(data, p);
-    	log.info("Enabled! (Version: " + pdfFile.getVersion() + ")");
+    	log.info("Enabled! <Version: " + pdfFile.getVersion() + ">");
 	}
 	public void onDisable(){		
 		log.info("Disabled!");
@@ -42,10 +49,12 @@ public class CouponCodes extends JavaPlugin{
 	    }	    
 	    Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");	    
 	    if (permissionsPlugin == null) {
-	        log.severe("Permissions not detected, expect errors!");	       
+	        log.severe("Permissions not detected, defaulting to op!");
+	        op = true;
 	        return;
 	    }
-	    permissionsHandler = ((Permissions) permissionsPlugin).getHandler();	    
+	    permissionsHandler = ((Permissions) permissionsPlugin).getHandler();	
+	    op = false;
 	}
 	private void checkiConomy(){
 		Plugin iC = this.getServer().getPluginManager().getPlugin("iConomy");
@@ -54,9 +63,5 @@ public class CouponCodes extends JavaPlugin{
 		}else{
 			p = false;
 		}
-	}
-	public static void reload(){		
-		PluginConfig.reloadSettings(data);
-		return;
 	}
 }
