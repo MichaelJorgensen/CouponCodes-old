@@ -22,6 +22,11 @@ public class Coupon extends Configuration{
 		}
 		return yml;
 	}
+	public static void saveAll(){
+		final Coupon yml = getYML();
+		yml.save();
+		return;
+	}
 	public static void create(String code, boolean ic, int id, int amount, int canbeused){
 		final Coupon yml = getYML();
 		yml.setProperty("config.coupons." + code + ".prize.id", id);
