@@ -1,11 +1,13 @@
 package com.lala.CouponCodes.Commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.lala.CouponCodes.CouponCodes;
+import com.lala.CouponCodes.Configs.Coupon;
 
 public class C implements CommandExecutor {
 	@SuppressWarnings("unused")
@@ -33,9 +35,35 @@ public class C implements CommandExecutor {
 		return false;
 	}
 	private void ic(Player player, String[] args, String code){
-		//Config stuff needs to be done first
+		int canbeused = 1;
+		try{
+			if (args.length >= 5) canbeused = Integer.parseInt(args[4]);
+		}catch (Exception e){
+			player.sendMessage(ChatColor.RED + args[4] + " is not an integer!");
+			return;
+		}
+		try{
+			Coupon.make(code, true, 0, Integer.parseInt(args[3]), canbeused);
+			return;
+		}catch (Exception e){
+			player.sendMessage(ChatColor.RED + "Error on syntax");
+			return;
+		}
 	}
 	private void add(Player player, String[] args, String code){
-		//Config stuff needs some work first
+		int canbeused = 1;
+		try{
+			if (args.length >= 5) canbeused = Integer.parseInt(args[4]);
+		}catch (Exception e){
+			player.sendMessage(ChatColor.RED + args[4] + " is not an integer!");
+			return;
+		}
+		try{
+			Coupon.make(code, false, Integer.parseInt(args[2]), Integer.parseInt(args[3]), canbeused);
+			return;
+		}catch (Exception e){
+			player.sendMessage(ChatColor.RED + "Error on syntax");
+			return;
+		}
 	}
 }
