@@ -27,7 +27,6 @@ public class CouponCodes extends JavaPlugin{
 	public static File data;
 	public iConomy iConomy = null;
 	boolean p;
-	boolean op;
 	public void onEnable(){
     	PluginDescriptionFile pdfFile = getDescription();    	
     	getCommand("coupon").setExecutor(c);
@@ -50,11 +49,11 @@ public class CouponCodes extends JavaPlugin{
 	    Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");	    
 	    if (permissionsPlugin == null) {
 	        log.severe("Permissions not detected, defaulting to op!");
-	        op = true;
+	        Plugin plugin = this.getServer().getPluginManager().getPlugin("CouponCodes");
+	        this.getServer().getPluginManager().disablePlugin(plugin);	        
 	        return;
 	    }
-	    ph = ((Permissions) permissionsPlugin).getHandler();	
-	    op = false;
+	    ph = ((Permissions) permissionsPlugin).getHandler();	    
 	}
 	private void checkiConomy(){
 		Plugin iC = this.getServer().getPluginManager().getPlugin("iConomy");
