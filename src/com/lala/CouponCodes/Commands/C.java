@@ -45,7 +45,7 @@ public class C implements CommandExecutor {
 					return true;
 				}
 			}
-			else if (args[0].equalsIgnoreCase("redeem") && args.length >= 2 && CouponCodes.ph.has(player, "coupon.redeem")){
+			else if (args[0].equalsIgnoreCase("redeem") && args.length >= 2 && CouponCodes.ph.has(player, "coupon.redeem") || CouponCodes.ph.has(player, "coupon." + args[1])){
 				String code = args[1];
 				if (Coupon.hasPlayerUsedCoupon(code, player.getName())){
 					player.sendMessage(ChatColor.RED + "You have already used this coupon!");
