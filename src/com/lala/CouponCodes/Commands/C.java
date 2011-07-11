@@ -43,7 +43,7 @@ public class C implements CommandExecutor {
 			return;
 		}
 		try{
-			Coupon.make(code, true, 0, Integer.parseInt(args[3]), canbeused);
+			Coupon.create(code, true, 0, Integer.parseInt(args[3]), canbeused);
 			return;
 		}catch (Exception e){
 			player.sendMessage(ChatColor.RED + "Error on syntax");
@@ -59,7 +59,7 @@ public class C implements CommandExecutor {
 			return;
 		}
 		try{
-			Coupon.make(code, false, Integer.parseInt(args[2]), Integer.parseInt(args[3]), canbeused);
+			Coupon.create(code, false, Integer.parseInt(args[2]), Integer.parseInt(args[3]), canbeused);
 			return;
 		}catch (Exception e){
 			player.sendMessage(ChatColor.RED + "Error on syntax");
