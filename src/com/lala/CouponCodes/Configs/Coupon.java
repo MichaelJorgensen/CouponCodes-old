@@ -35,6 +35,10 @@ public class Coupon extends Configuration{
 		final Coupon yml = getYML();
 		//redeem stuff
 	}
+	public static void renew(String code, int newnumber){
+		final Coupon yml = getYML();
+		//add renew stuff
+	}
 	public static int getId(String code){
 		final Coupon yml = getYML();
 		int i;
