@@ -10,7 +10,7 @@ public class Coupon extends Configuration{
 	public Coupon(File file){
 		super(file);
 	}
-	private Coupon YML(){
+	private static Coupon getYML(){
 		File d = CouponCodes.data;
 		final File yaml = new File(d + "/coupons", "Codes.yml");
 		if (!d.exists()){
@@ -21,5 +21,14 @@ public class Coupon extends Configuration{
 			yml.load();
 		}
 		return yml;
+	}
+	public static void make(String code, boolean ic, int id, int amount, int canbeused){
+		final Coupon yml = getYML();
+		yml.setProperty("config.coupons." + code + ".prize.id", id);
+		yml.setProperty("config.coupons." + code + ".prize.amount", amount);
+		yml.setProperty("config.coupons." + code + ".isiConomy", ic);
+		yml.setProperty("config.coupons." + code + ".timescanbeused", canbeused);
+		yml.save();
+		return;
 	}
 }
