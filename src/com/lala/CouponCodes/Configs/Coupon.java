@@ -39,7 +39,10 @@ public class Coupon extends Configuration{
 	}
 	public static void renew(String code, int newnumber){
 		final Coupon yml = getYML();
-		//add renew stuff
+		yml.removeProperty("config.coupons." + code + ".players");
+		yml.setProperty("config.coupons." + code + ".timescanbeused", newnumber);
+		yml.save();
+		return;
 	}
 	public static int getId(String code){
 		final Coupon yml = getYML();
