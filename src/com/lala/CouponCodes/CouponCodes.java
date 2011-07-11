@@ -20,8 +20,6 @@ public class CouponCodes extends JavaPlugin{
 	/**
 	 * @author LaLa
 	 * This is CouponCodes v2.0
-	 * More like v0.0.0.0.1
-	 * (rewriting entire plugin!)
 	 */
 	private final C c = new C(this);	
 	public static PermissionHandler permissionHandler;
