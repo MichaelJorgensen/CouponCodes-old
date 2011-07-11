@@ -23,7 +23,7 @@ public class CouponCodes extends JavaPlugin{
 	 * (rewriting entire plugin!)
 	 */
 	private final C c = new C(this);	
-	public static PermissionHandler ph;
+	public static PermissionHandler permissionHandler;
 	public static File data;
 	public iConomy iConomy = null;
 	boolean p;
@@ -43,7 +43,7 @@ public class CouponCodes extends JavaPlugin{
 		log.info("Disabled!");
 	}
 	private void setupPermissions() {
-	    if (ph != null) {
+	    if (permissionHandler != null) {
 	        return;
 	    }	    
 	    Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");	    
@@ -53,7 +53,7 @@ public class CouponCodes extends JavaPlugin{
 	        this.getServer().getPluginManager().disablePlugin(plugin);	        
 	        return;
 	    }
-	    ph = ((Permissions) permissionsPlugin).getHandler();	    
+	    permissionHandler = ((Permissions) permissionsPlugin).getHandler();	    
 	}
 	private void checkiConomy(){
 		Plugin iC = this.getServer().getPluginManager().getPlugin("iConomy");

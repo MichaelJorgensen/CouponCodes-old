@@ -25,7 +25,10 @@ public class C implements CommandExecutor {
 			return true;
 		}else{
 			Player player = (Player) sender;
-			if (args[0].equalsIgnoreCase("add") && args.length >= 3 && CouponCodes.ph.has(player, "coupon.add")){
+			if (args.length == 0){
+				return false;
+			}
+			if (args[0].equalsIgnoreCase("add") && args.length >= 3 && CouponCodes.permissionHandler.has(player, "coupon.add")){
 				if (args[1].equalsIgnoreCase("ic") && args.length >=4){
 					String code = args[2];
 					if (Coupon.exists(code)){
@@ -45,7 +48,7 @@ public class C implements CommandExecutor {
 					return true;
 				}
 			}
-			else if (args[0].equalsIgnoreCase("redeem") && args.length >= 2 && CouponCodes.ph.has(player, "coupon.redeem") || CouponCodes.ph.has(player, "coupon." + args[1])){
+			else if (args[0].equalsIgnoreCase("redeem") && args.length >= 2 && CouponCodes.permissionHandler.has(player, "coupon.redeem") || CouponCodes.permissionHandler.has(player, "coupon." + args[1])){
 				String code = args[1];
 				if (Coupon.hasPlayerUsedCoupon(code, player.getName())){
 					player.sendMessage(ChatColor.RED + "You have already used this coupon!");
@@ -75,9 +78,10 @@ public class C implements CommandExecutor {
 						return true;
 					}
 				}
+			}else{
+				return true;
 			}
 		}
-		return false;
 	}
 	private void ic(Player player, String[] args, String code){
 		int canbeused = 1;
