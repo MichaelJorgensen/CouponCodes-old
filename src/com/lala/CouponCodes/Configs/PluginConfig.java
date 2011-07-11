@@ -11,16 +11,6 @@ public class PluginConfig extends Configuration{
 	public static boolean iConomy;
 	public static boolean icpriceenabled;
 	public static int icprice;
-	public static String nopmsg;
-	public static String nopmsgcolor;
-	public static String notaplayer;
-	public static String syntaxparseissue;
-	public static String couponalreadyexists;
-	public static String couponalreadyused;
-	public static String coupondoesntexist;
-	public static String couponremoved;
-	public static String couponalreadyrenewed;
-	public static String couponsremoved;
 	public static boolean oneuseonly;
 	public static boolean debug;
 	public PluginConfig(File file){
@@ -41,16 +31,6 @@ public class PluginConfig extends Configuration{
 		yml.setProperty("author", "LaLa");
 		iConomy = yml.getBoolean("config.iconomy.enabled", false);
 		yml.setProperty("config.iconomy.has", p);
-		nopmsg = yml.getString("config.messages.insufficientpermissions.msg", "You do not have permission to use this command.");
-		notaplayer = yml.getString("config.messages.notaplayer", "You need to be a player for me to work!");
-		nopmsgcolor = yml.getString("config.messages.insufficientpermissions.color", "RED");
-		syntaxparseissue = yml.getString("config.messages.syntaxparseissue", "Error on syntax. String instead of int?");
-		couponalreadyexists = yml.getString("config.messages.couponalreadyexists", "That coupon already exists!");
-		couponalreadyused = yml.getString("config.messages.couponalreadyused", "That coupon has already been used!");
-		coupondoesntexist = yml.getString("config.messages.coupondoesntexist", "That coupon doesn't exist!");
-		couponremoved = yml.getString("config.messages.couponremoved", "Coupon removed!");
-		couponalreadyrenewed = yml.getString("config.messages.couponalreadyrenewed", "Coupon has already been renewed!");
-		couponsremoved = yml.getString("config.messages.allcouponsremoved", "All coupons have been removed!");
 		oneuseonly = yml.getBoolean("config.coupons.onetimeuseperplayer", true);
 		debug = yml.getBoolean("config.debug", false);
 		yml.save();
@@ -75,16 +55,6 @@ public class PluginConfig extends Configuration{
 		}
 		icprice = yml.getInt("config.iconomy.price", 10);
 		icpriceenabled = yml.getBoolean("config.iconomy.price.enabled", false);
-		nopmsg = yml.getString("config.messages.insufficientpermissions.msg", "You do not have permission to use this command.");
-		notaplayer = yml.getString("config.messages.notaplayer", "You need to be a player for me to work!");
-		nopmsgcolor = yml.getString("config.messages.insufficientpermissions.color", "RED");
-		syntaxparseissue = yml.getString("config.messages.syntaxparseissue", "Error on syntax. String instead of int?");
-		couponalreadyexists = yml.getString("config.messages.couponalreadyexists", "That coupon already exists!");
-		couponalreadyused = yml.getString("config.messages.couponalreadyused", "That coupon has already been used!");
-		coupondoesntexist = yml.getString("config.messages.coupondoesntexist", "That coupon doesn't exist!");
-		couponremoved = yml.getString("config.messages.couponremoved", "Coupon removed!");
-		couponalreadyrenewed = yml.getString("config.messages.couponalreadyrenewed", "Coupon has already been renewed!");
-		couponsremoved = yml.getString("config.messages.allcouponsremoved", "All coupons have been removed!");
 		oneuseonly = yml.getBoolean("config.coupons.onetimeuseperplayer", true);
 		debug = yml.getBoolean("config.debug", false);
 		yml.save();
