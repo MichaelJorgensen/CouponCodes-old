@@ -6,8 +6,8 @@ commands:
     coupon:
         description: Coupon
         usage: |
-               /<command>
+               /<command> - See forum post for more details on syntax
     c:
         description: Coupon
         usage: |
-               /<command>
+               /<command> - See forum post for more details on syntax
