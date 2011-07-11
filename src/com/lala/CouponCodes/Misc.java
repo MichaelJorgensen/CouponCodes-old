@@ -14,12 +14,4 @@ public class Misc {
 		}		
 		return build.toString();
 	}
-	public static boolean isDouble(String input){
-		try{
-			Integer.parseInt("input");
-			return true;
-		}catch (Exception e){
-			return false;
-		}
-	}
 }

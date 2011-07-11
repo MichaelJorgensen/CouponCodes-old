@@ -9,7 +9,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.iConomy.iConomy;
-import com.lala.CouponCodes.Commands.Coupon;
+import com.lala.CouponCodes.Commands.C;
 import com.lala.CouponCodes.Configs.PluginConfig;
 import com.lala.CouponCodes.Logger.log;
 import com.nijiko.permissions.PermissionHandler;
@@ -22,8 +22,8 @@ public class CouponCodes extends JavaPlugin{
 	 * More like v0.0.0.0.1
 	 * (rewriting entire plugin!)
 	 */
-	private final Coupon c = new Coupon(this);	
-	public static PermissionHandler permissionsHandler;
+	private final C c = new C(this);	
+	public static PermissionHandler ph;
 	public static File data;
 	public iConomy iConomy = null;
 	boolean p;
@@ -44,7 +44,7 @@ public class CouponCodes extends JavaPlugin{
 		log.info("Disabled!");
 	}
 	private void setupPermissions() {
-	    if (permissionsHandler != null) {
+	    if (ph != null) {
 	        return;
 	    }	    
 	    Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");	    
@@ -53,7 +53,7 @@ public class CouponCodes extends JavaPlugin{
 	        op = true;
 	        return;
 	    }
-	    permissionsHandler = ((Permissions) permissionsPlugin).getHandler();	
+	    ph = ((Permissions) permissionsPlugin).getHandler();	
 	    op = false;
 	}
 	private void checkiConomy(){
