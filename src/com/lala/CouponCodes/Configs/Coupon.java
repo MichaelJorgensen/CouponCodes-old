@@ -42,13 +42,13 @@ public class Coupon extends Configuration{
 	public static int getId(String code){
 		final Coupon yml = getYML();
 		int i;
-		i = (Integer) yml.getProperty("config.coupons." + code + "prize.id");
+		i = (Integer) yml.getProperty("config.coupons." + code + ".prize.id");
 		return i;
 	}
 	public static int getAmount(String code){
 		final Coupon yml = getYML();
 		int a;
-		a = (Integer) yml.getProperty("config.coupons." + code + "prize.amount");
+		a = (Integer) yml.getProperty("config.coupons." + code + ".prize.amount");
 		return a;
 	}
 	public static int getTimesCanBeUsed(String code){
@@ -62,5 +62,47 @@ public class Coupon extends Configuration{
 		boolean m;
 		m = (Boolean) yml.getProperty("config.coupons." + code + ".isiConomy");
 		return m;
+	}
+	public static boolean isUsed(String code){
+		final Coupon yml = getYML();
+		int u;
+		u = (Integer) yml.getProperty("config.coupons." + code + ".timescanbeused");
+		if (u == 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public static boolean hasPlayerUsedCoupon(String code, String name){
+		final Coupon yml = getYML();
+		Object o;
+		o = yml.getProperty("config.coupons." + code + ".players." + name);
+		if (o == null){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	public static boolean exists(String code){
+		final Coupon yml = getYML();
+		Object z;
+		z = yml.getProperty("config.coupons." + code);
+		if (z == null){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	public static void setTimesCanBeUsed(String code, int newnumber){
+		final Coupon yml = getYML();
+		yml.setProperty("config.coupons." + code + ".timescanbeused", newnumber);
+		yml.save();
+		return;
+	}
+	public static void addUsedPlayer(String code, String name){
+		final Coupon yml = getYML();		
+		yml.setProperty("config.coupons." + code + ".players." + name, true);
+		yml.save();
+		return;
 	}
 }
