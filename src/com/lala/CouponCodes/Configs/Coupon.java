@@ -31,9 +31,11 @@ public class Coupon extends Configuration{
 		yml.save();
 		return;
 	}
-	public static void redeem(String code, String name){
-		final Coupon yml = getYML();
-		//redeem stuff
+	public static void redeem(String code, String name){		
+		int newnumber = Coupon.getTimesCanBeUsed(code) - 1;
+		Coupon.setTimesCanBeUsed(code, newnumber);
+		Coupon.addUsedPlayer(code, name);
+		return;
 	}
 	public static void renew(String code, int newnumber){
 		final Coupon yml = getYML();
@@ -75,6 +77,9 @@ public class Coupon extends Configuration{
 	}
 	public static boolean hasPlayerUsedCoupon(String code, String name){
 		final Coupon yml = getYML();
+		if (PluginConfig.oneuseonly == false){
+			return false;
+		}
 		Object o;
 		o = yml.getProperty("config.coupons." + code + ".players." + name);
 		if (o == null){
