@@ -16,6 +16,9 @@ public class Config extends Configuration{
 	public Config(File file){
 		super(file);
 	}
+	/**
+	 * Will be deleted once new class (Coupon) is done
+	 */
 	public static void makeCoupon(File dataFolder, String code, int id, int amount, int ncbu, boolean ic) {		
 		final File yml = new File(dataFolder + "/coupons", "Codes.yml");
 		if (!dataFolder.exists()){
