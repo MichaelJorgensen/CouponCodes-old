@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.iConomy.iConomy;
 import com.lala.CouponCodes.Commands.C;
+import com.lala.CouponCodes.Configs.Coupon;
 import com.lala.CouponCodes.Configs.PluginConfig;
 import com.lala.CouponCodes.Logger.log;
 import com.nijiko.permissions.PermissionHandler;
@@ -39,7 +40,8 @@ public class CouponCodes extends JavaPlugin{
         PluginConfig.loadSettings(data, p);
     	log.info("Enabled! <Version: " + pdfFile.getVersion() + ">");
 	}
-	public void onDisable(){		
+	public void onDisable(){
+		Coupon.saveAll();
 		log.info("Disabled!");
 	}
 	private void setupPermissions() {
