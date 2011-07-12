@@ -105,6 +105,7 @@ public class C implements CommandExecutor {
 								player.sendMessage(ChatColor.RED + "iConomy is disabled, you cannot create an iConomy code!");
 								return true;
 							}else{
+								Coupon.redeem(code, player.getName());
 								Account ac = iConomy.getAccount(player.getName());
 								double money = Coupon.getAmount(code);
 								ac.getHoldings().add(money);
