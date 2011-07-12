@@ -76,7 +76,7 @@ public class Coupon extends Configuration{
 	public static int getTimesCanBeUsed(String code){
 		final Coupon yml = getYML();
 		int t;
-		t = (Integer) yml.getProperty("config.coupons." + code + ".timescabeused");
+		t = (Integer) yml.getProperty("config.coupons." + code + ".timescanbeused");
 		return t;
 	}
 	public static boolean isiConomy(String code){

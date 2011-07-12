@@ -90,7 +90,7 @@ public class C implements CommandExecutor {
 							ac.getHoldings().add(money);
 							player.sendMessage(ChatColor.RED + "Coupon redeemed! You received " + Coupon.getAmount(code) + " money!");
 							return true;
-						}else{
+						}else{							
 							int id = Coupon.getId(code);
 							int amount = Coupon.getAmount(code);
 							Inventory i = player.getInventory();
