@@ -27,12 +27,13 @@ public class C implements CommandExecutor {
 			return true;
 		}
 		if (args.length == 0){
+			// Without this typing /c will get an internal error :O
 			help((Player) sender);
 			return true;
 		}
 		Player player = (Player) sender;
 		if (args[0].equalsIgnoreCase("add") && args.length >= 3 && CouponCodes.permissionHandler.has(player, "coupon.add")){
-			if (args[1].equalsIgnoreCase("ic") && args.length >= 4){
+			if (args[1].equalsIgnoreCase("ic") && args.length >= 4){ // /c add ic (adding iconomy coupon)
 				String code = args[2];
 				if (PluginConfig.iConomy == false){
 					player.sendMessage(ChatColor.RED + "iConomy is disabled, you cannot create an iConomy code!");
