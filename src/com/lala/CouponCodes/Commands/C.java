@@ -108,7 +108,7 @@ public class C implements CommandExecutor {
 								Account ac = iConomy.getAccount(player.getName());
 								double money = Coupon.getAmount(code);
 								ac.getHoldings().add(money);
-								player.sendMessage(ChatColor.RED + "Coupon redeemed! You received " + Coupon.getAmount(code) + " money!");
+								player.sendMessage(ChatColor.GREEN + "Coupon redeemed! You received " + Coupon.getAmount(code) + " money!");
 								return true;
 							}
 						}else{							
