@@ -19,7 +19,7 @@ import com.nijikokun.bukkit.Permissions.Permissions;
 public class CouponCodes extends JavaPlugin{
 	/**
 	 * @author LaLa
-	 * This is CouponCodes v2.0
+	 * This is CouponCodes v1.5
 	 */
 	private final C c = new C(this);	
 	public static PermissionHandler permissionHandler;
