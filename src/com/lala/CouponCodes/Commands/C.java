@@ -13,7 +13,6 @@ import com.iConomy.system.Account;
 import com.lala.CouponCodes.CouponCodes;
 import com.lala.CouponCodes.Configs.Coupon;
 import com.lala.CouponCodes.Configs.PluginConfig;
-import com.lala.CouponCodes.Logger.log;
 
 public class C implements CommandExecutor {
 	@SuppressWarnings("unused")
@@ -136,9 +135,28 @@ public class C implements CommandExecutor {
 			player.sendMessage(ChatColor.GOLD + "Removed all coupons");
 			return true;
 		}
-		else if (args[0].equalsIgnoreCase("renew") && args.length >= 2){
-			log.debug(command.getName() +  " " + args);
-			return true;
+		else if (args[0].equalsIgnoreCase("renew") && args.length >= 2 && CouponCodes.permissionHandler.has(player, "coupon.renew")){
+			String code = args[1];
+			if (Coupon.exists(code)){
+				if (Coupon.isUsed(code)){
+					int newnumber = 1;
+					try{
+					if (args.length >= 3) newnumber = Integer.parseInt(args[2]);
+					}catch (NumberFormatException e){
+						player.sendMessage(ChatColor.RED + "Syntax error, wanted integer but got a string!");
+						return true;
+					}
+					Coupon.renew(code, newnumber);
+					player.sendMessage(ChatColor.GREEN + "Coupon renewed!");
+					return true;
+				}else{
+					player.sendMessage(ChatColor.RED + "That code is already renewed!");
+					return true;
+				}
+			}else{
+				player.sendMessage(ChatColor.RED + "That coupon doesn't exist!");
+				return true;
+			}			
 		}
 		else if (args[0].equalsIgnoreCase("reload")){
 			PluginConfig.reloadSettings(CouponCodes.data);
