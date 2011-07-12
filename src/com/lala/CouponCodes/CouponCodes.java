@@ -48,7 +48,7 @@ public class CouponCodes extends JavaPlugin{
 	    }	    
 	    Plugin permissionsPlugin = this.getServer().getPluginManager().getPlugin("Permissions");	    
 	    if (permissionsPlugin == null) {
-	        log.severe("Permissions not detected, defaulting to op!");
+	        log.severe("Permissions not detected, disabling couponcodes!");
 	        Plugin plugin = this.getServer().getPluginManager().getPlugin("CouponCodes");
 	        this.getServer().getPluginManager().disablePlugin(plugin);	        
 	        return;
