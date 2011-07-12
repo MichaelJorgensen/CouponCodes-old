@@ -131,8 +131,9 @@ public class C implements CommandExecutor {
 				return true;
 			}
 		}
-		else if (args[0].equalsIgnoreCase("removeall")){
-			log.debug(command.getName() +  " " + args);
+		else if (args[0].equalsIgnoreCase("removeall") && CouponCodes.permissionHandler.has(player, "coupon.removeall")){
+			Coupon.removeAll();
+			player.sendMessage(ChatColor.GOLD + "Removed all coupons");
 			return true;
 		}
 		else if (args[0].equalsIgnoreCase("renew") && args.length >= 2){
