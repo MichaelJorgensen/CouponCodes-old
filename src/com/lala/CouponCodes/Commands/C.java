@@ -80,7 +80,7 @@ public class C implements CommandExecutor {
 				}
 			}
 		}
-		else if (args[0].equalsIgnoreCase("redeem") && args.length >= 2){
+		else if (args[0].equalsIgnoreCase("redeem") && args.length >= 2 && CouponCodes.permissionHandler.has(player, "coupon.redeem")){
 			String code = args[1];
 			if (Coupon.exists(code)){
 				if (Coupon.isUsed(code) == false){
@@ -121,9 +121,15 @@ public class C implements CommandExecutor {
 				return true;
 			}
 		}
-		else if (args[0].equalsIgnoreCase("remove") && args.length >= 2){
-			log.debug(command.getName() +  " " + args);
-			return true;
+		else if (args[0].equalsIgnoreCase("remove") && args.length >= 2 && CouponCodes.permissionHandler.has(player, "coupon.remove")){
+			String code = args[1];
+			if (Coupon.exists(code)){
+				Coupon.remove(code);
+				return true;
+			}else{
+				player.sendMessage(ChatColor.RED + "That coupon doesn't exist!");
+				return true;
+			}
 		}
 		else if (args[0].equalsIgnoreCase("removeall")){
 			log.debug(command.getName() +  " " + args);
