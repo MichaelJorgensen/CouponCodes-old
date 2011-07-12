@@ -91,7 +91,7 @@ public class C implements CommandExecutor {
 				}
 			}
 		}
-		else if (args[0].equalsIgnoreCase("redeem") && args.length >= 2 && CouponCodes.permissionHandler.has(player, "coupon.redeem")){
+		else if (args[0].equalsIgnoreCase("redeem") && args.length >= 2 && CouponCodes.permissionHandler.has(player, "coupon.redeem") || args[0].equalsIgnoreCase("redeem") && CouponCodes.permissionHandler.has(player, "coupon." + args[1])){
 			String code = args[1];
 			if (Coupon.exists(code)){
 				if (Coupon.isUsed(code) == false){
