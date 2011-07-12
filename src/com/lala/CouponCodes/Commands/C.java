@@ -83,7 +83,7 @@ public class C implements CommandExecutor {
 			String code = args[1];
 			if (Coupon.exists(code)){
 				if (Coupon.isUsed(code) == false){
-					if (Coupon.hasPlayerUsedCoupon(code, player.getName())){
+					if (Coupon.hasPlayerUsedCoupon(code, player.getName()) == false){
 						if (Coupon.isiConomy(code)){
 							Account ac = iConomy.getAccount(player.getName());
 							double money = Coupon.getAmount(code);
