@@ -55,6 +55,12 @@ public class Coupon extends Configuration{
 		yml.save();
 		return;
 	}
+	public static void removeAll(){
+		final Coupon yml = getYML();
+		yml.removeProperty("config");
+		yml.save();
+		return;
+	}
 	public static int getId(String code){
 		final Coupon yml = getYML();
 		int i;
