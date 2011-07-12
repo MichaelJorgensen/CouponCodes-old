@@ -33,6 +33,10 @@ public class C implements CommandExecutor {
 		if (args[0].equalsIgnoreCase("add") && args.length >= 3 && CouponCodes.permissionHandler.has(player, "coupon.add")){
 			if (args[1].equalsIgnoreCase("ic") && args.length >= 4){
 				String code = args[2];
+				if (PluginConfig.iConomy == false){
+					player.sendMessage(ChatColor.RED + "iConomy is disabled, you cannot create an iConomy code!");
+					return true;
+				}
 				if (Coupon.exists(code)){
 					player.sendMessage(ChatColor.RED + "That coupon already exists!");
 					return true;
@@ -97,11 +101,16 @@ public class C implements CommandExecutor {
 				if (Coupon.isUsed(code) == false){
 					if (Coupon.hasPlayerUsedCoupon(code, player.getName()) == false){
 						if (Coupon.isiConomy(code)){
-							Account ac = iConomy.getAccount(player.getName());
-							double money = Coupon.getAmount(code);
-							ac.getHoldings().add(money);
-							player.sendMessage(ChatColor.RED + "Coupon redeemed! You received " + Coupon.getAmount(code) + " money!");
-							return true;
+							if (PluginConfig.iConomy == false){
+								player.sendMessage(ChatColor.RED + "iConomy is disabled, you cannot create an iConomy code!");
+								return true;
+							}else{
+								Account ac = iConomy.getAccount(player.getName());
+								double money = Coupon.getAmount(code);
+								ac.getHoldings().add(money);
+								player.sendMessage(ChatColor.RED + "Coupon redeemed! You received " + Coupon.getAmount(code) + " money!");
+								return true;
+							}
 						}else{							
 							int id = Coupon.getId(code);
 							int amount = Coupon.getAmount(code);
