@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import com.lala.CouponCodes.CouponCodes;
 import com.lala.CouponCodes.Configs.Coupon;
+import com.lala.CouponCodes.Configs.PluginConfig;
 import com.lala.CouponCodes.Logger.log;
 
 public class C implements CommandExecutor {
@@ -92,7 +93,8 @@ public class C implements CommandExecutor {
 			return true;
 		}
 		else if (args[0].equalsIgnoreCase("reload")){
-			log.debug(command.getName() +  " " + args);
+			PluginConfig.reloadSettings(CouponCodes.data);
+			player.sendMessage(ChatColor.LIGHT_PURPLE + "Plugin reloaded!");			
 			return true;
 		}
 		return false;
