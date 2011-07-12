@@ -25,7 +25,7 @@ public class CouponCodes extends JavaPlugin{
 	public static PermissionHandler permissionHandler;
 	public static File data;
 	public iConomy iConomy = null;
-	boolean p;
+	public static boolean p;
 	public void onEnable(){
     	PluginDescriptionFile pdfFile = getDescription();    	
     	getCommand("coupon").setExecutor(c);

@@ -181,7 +181,7 @@ public class C implements CommandExecutor {
 			}			
 		}
 		else if (args[0].equalsIgnoreCase("reload")){
-			PluginConfig.reloadSettings(CouponCodes.data);
+			PluginConfig.loadSettings(CouponCodes.data, CouponCodes.p);
 			player.sendMessage(ChatColor.LIGHT_PURPLE + "Plugin reloaded!");			
 			return true;
 		}

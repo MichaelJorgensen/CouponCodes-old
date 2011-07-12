@@ -44,19 +44,4 @@ public class PluginConfig extends Configuration{
 			return;
 		}		
 	}
-	public static void reloadSettings(File dataFolder){
-		final File yaml = new File(dataFolder, "Config.yml");
-		if (!dataFolder.exists()){
-			dataFolder.mkdirs();
-		}
-		final PluginConfig yml = new PluginConfig(yaml);
-		if (yaml.exists()){
-			yml.load();
-		}
-		icprice = yml.getInt("config.iconomy.price", 10);
-		icpriceenabled = yml.getBoolean("config.iconomy.price.enabled", false);
-		oneuseonly = yml.getBoolean("config.coupons.onetimeuseperplayer", true);
-		debug = yml.getBoolean("config.debug", false);
-		yml.save();
-	}
 }
