@@ -6,6 +6,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.iConomy.iConomy;
+import com.iConomy.system.Account;
 import com.lala.CouponCodes.CouponCodes;
 import com.lala.CouponCodes.Configs.Coupon;
 import com.lala.CouponCodes.Configs.PluginConfig;
@@ -77,7 +79,31 @@ public class C implements CommandExecutor {
 			}
 		}
 		else if (args[0].equalsIgnoreCase("redeem") && args.length >= 2){
-			log.debug(command.getName() +  " " + args);
+			String code = args[1];
+			if (Coupon.exists(code)){
+				if (Coupon.isUsed(code) == false){
+					if (Coupon.hasPlayerUsedCoupon(code, player.getName())){
+						if (Coupon.isiConomy(code)){
+							Account ac = iConomy.getAccount(player.getName());
+							double money = Coupon.getAmount(code);
+							ac.getHoldings().add(money);
+							player.sendMessage(ChatColor.RED + "Coupon redeemed! You received " + Coupon.getAmount(code) + " money!");
+							return true;
+						}else{
+							//non iconomy redeem here!
+						}
+					}else{
+						player.sendMessage(ChatColor.RED + "You have already used this coupon!");
+						return true;
+					}
+				}else{
+					player.sendMessage(ChatColor.RED + "That coupon has already been used!");
+					return true;
+				}
+			}else{
+				player.sendMessage(ChatColor.RED + "That coupon doesn't exist!");
+				return true;
+			}
 			return true;
 		}
 		else if (args[0].equalsIgnoreCase("remove") && args.length >= 2){
