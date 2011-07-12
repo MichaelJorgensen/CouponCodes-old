@@ -27,7 +27,8 @@ public class C implements CommandExecutor {
 			return true;
 		}
 		if (args.length == 0){
-			return false;
+			help((Player) sender);
+			return true;
 		}
 		Player player = (Player) sender;
 		if (args[0].equalsIgnoreCase("add") && args.length >= 3 && CouponCodes.permissionHandler.has(player, "coupon.add")){
@@ -185,6 +186,19 @@ public class C implements CommandExecutor {
 			player.sendMessage(ChatColor.LIGHT_PURPLE + "Plugin reloaded!");			
 			return true;
 		}
-		return false;
+		help(player);
+		return true;
+	}
+	private void help (Player player){
+		player.sendMessage(ChatColor.YELLOW + "-----Coupon Code Syntax-----");
+		player.sendMessage(ChatColor.GOLD + "/coupon OR /c for all commands");
+		player.sendMessage(ChatColor.GOLD + "/c redeem [code]");
+		player.sendMessage(ChatColor.GOLD + "/c add [code] [id] [amount] [#canbeused] - See post for more info");
+		player.sendMessage(ChatColor.GOLD + "/c add ic [code] [prizemoney] [#canbeused] - See post for more info");
+		player.sendMessage(ChatColor.GOLD + "/c remove [code]");
+		player.sendMessage(ChatColor.GOLD + "/c removeall - WARNING - will permanently remove all coupons!");
+		player.sendMessage(ChatColor.GOLD + "/c renew [code] [#canbeused] - Activates a code again");
+		player.sendMessage(ChatColor.GOLD + "/c reload - Reload this plugin and its config easily");
+		return;
 	}
 }
