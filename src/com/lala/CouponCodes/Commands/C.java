@@ -5,6 +5,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import com.iConomy.iConomy;
 import com.iConomy.system.Account;
@@ -90,7 +92,21 @@ public class C implements CommandExecutor {
 							player.sendMessage(ChatColor.RED + "Coupon redeemed! You received " + Coupon.getAmount(code) + " money!");
 							return true;
 						}else{
-							//non iconomy redeem here!
+							int id = Coupon.getId(code);
+							int amount = Coupon.getAmount(code);
+							Inventory i = player.getInventory();
+							ItemStack prize = new ItemStack(id, amount);
+							if (i.firstEmpty() == -1){
+								Coupon.redeem(code, player.getName());
+								player.getWorld().dropItem(player.getLocation(), prize);
+								player.sendMessage(ChatColor.GREEN + "Coupon redeemed! (Item dropped because your inventory is full!)");
+								return true;
+							}else{
+								Coupon.redeem(code, player.getName());
+								i.addItem(prize);
+								player.sendMessage(ChatColor.GREEN + "Coupon redeemed!");
+								return true;
+							}
 						}
 					}else{
 						player.sendMessage(ChatColor.RED + "You have already used this coupon!");
@@ -104,7 +120,6 @@ public class C implements CommandExecutor {
 				player.sendMessage(ChatColor.RED + "That coupon doesn't exist!");
 				return true;
 			}
-			return true;
 		}
 		else if (args[0].equalsIgnoreCase("remove") && args.length >= 2){
 			log.debug(command.getName() +  " " + args);
