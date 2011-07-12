@@ -39,6 +39,12 @@ public class C implements CommandExecutor {
 				}else{
 					if (args.length < 4) return false;
 					try{
+						if (PluginConfig.icpriceenabled == true){
+							Account ac = iConomy.getAccount(player.getName());
+							double p = PluginConfig.icprice;
+							ac.getHoldings().subtract(p);
+							player.sendMessage(ChatColor.RED + "Price to make coupon: " + p);
+						}
 						int canbeused = 1;
 						if (args.length >= 5) canbeused = Integer.parseInt(args[4]);
 						Coupon.create(code, true, 0, Integer.parseInt(args[3]), canbeused);
@@ -60,6 +66,12 @@ public class C implements CommandExecutor {
 				return true;
 			}else{
 				try{
+					if (PluginConfig.icpriceenabled == true){
+						Account ac = iConomy.getAccount(player.getName());
+						double p = PluginConfig.icprice;
+						ac.getHoldings().subtract(p);
+						player.sendMessage(ChatColor.RED + "Price to make coupon: " + p);
+					}
 					int canbeused = 1;
 					int amount = 1;
 					int id;
