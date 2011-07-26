@@ -32,8 +32,8 @@ public class C implements CommandExecutor {
 			return true;
 		}
 		Player player = (Player) sender;
-		if (args[0].equalsIgnoreCase("add") && args.length >= 3 && CouponCodes.permissionHandler.has(player, "coupon.add")){
-			if (args[1].equalsIgnoreCase("ic") && args.length >= 4){ // /c add ic (adding iconomy coupon)
+		if (args[0].equalsIgnoreCase("add") && args.length >= 3 && player.hasPermission("coupon.add")){
+			if (args[1].equalsIgnoreCase("ic") && args.length >= 4){
 				String code = args[2];
 				if (PluginConfig.iConomy == false){
 					player.sendMessage(ChatColor.RED + "iConomy is disabled, you cannot create an iConomy code!");
@@ -97,7 +97,7 @@ public class C implements CommandExecutor {
 				}
 			}
 		}
-		else if (args[0].equalsIgnoreCase("redeem") && args.length >= 2 && CouponCodes.permissionHandler.has(player, "coupon.redeem") || args[0].equalsIgnoreCase("redeem") && CouponCodes.permissionHandler.has(player, "coupon." + args[1])){
+		else if (args[0].equalsIgnoreCase("redeem") && args.length >= 2 && player.hasPermission("coupon.redeem") || args[0].equalsIgnoreCase("redeem") && player.hasPermission("coupon." + args[1])){
 			String code = args[1];
 			if (Coupon.exists(code)){
 				if (Coupon.isUsed(code) == false){
@@ -144,22 +144,23 @@ public class C implements CommandExecutor {
 				return true;
 			}
 		}
-		else if (args[0].equalsIgnoreCase("remove") && args.length >= 2 && CouponCodes.permissionHandler.has(player, "coupon.remove")){
+		else if (args[0].equalsIgnoreCase("remove") && args.length >= 2 && player.hasPermission("coupon.remove")){
 			String code = args[1];
 			if (Coupon.exists(code)){
 				Coupon.remove(code);
+				player.sendMessage(ChatColor.GREEN + "Coupon " + code + " removed!");
 				return true;
 			}else{
 				player.sendMessage(ChatColor.RED + "That coupon doesn't exist!");
 				return true;
 			}
 		}
-		else if (args[0].equalsIgnoreCase("removeall") && CouponCodes.permissionHandler.has(player, "coupon.removeall")){
+		else if (args[0].equalsIgnoreCase("removeall") && player.hasPermission("coupon.remove.all")){
 			Coupon.removeAll();
 			player.sendMessage(ChatColor.GOLD + "Removed all coupons");
 			return true;
 		}
-		else if (args[0].equalsIgnoreCase("renew") && args.length >= 2 && CouponCodes.permissionHandler.has(player, "coupon.renew")){
+		else if (args[0].equalsIgnoreCase("renew") && args.length >= 2 && player.hasPermission("coupon.renew")){
 			String code = args[1];
 			if (Coupon.exists(code)){
 				if (Coupon.isUsed(code)){
