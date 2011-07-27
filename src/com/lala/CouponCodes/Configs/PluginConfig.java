@@ -13,6 +13,7 @@ public class PluginConfig extends Configuration{
 	public static int icprice;
 	public static boolean oneuseonly;
 	public static boolean debug;
+	
 	public PluginConfig(File file){
 		super(file);
 	}
@@ -25,16 +26,16 @@ public class PluginConfig extends Configuration{
 		if (yaml.exists()){
 			yml.load();
 		}
-		yml.setHeader("#Learn more about how this config can be edited and changed to your preference on the forum page.");		
 		icprice = yml.getInt("config.iconomy.couponcost.price", 10);
 		icpriceenabled = yml.getBoolean("config.iconomy.couponcost.enabled", false);
-		yml.setProperty("author", "LaLa");
 		iConomy = yml.getBoolean("config.iconomy.enabled", false);
-		yml.setProperty("config.iconomy.has", p);
 		oneuseonly = yml.getBoolean("config.coupons.onetimeuseperplayer", true);
 		debug = yml.getBoolean("config.debug", false);
+		yml.setHeader("#Learn more about how this config can be edited and changed to your preference on the forum page.");
+		yml.setProperty("author", "LaLa");
+		yml.setProperty("config.iconomy.has", p);
 		yml.save();
-		if (p == false && iConomy == true || p == false && icpriceenabled == true || iConomy == false && icpriceenabled == true){
+		if (!p && iConomy||!p && icpriceenabled||!iConomy && icpriceenabled){
 			log.severe("iConomy is enabled, but iConomy was not found or is disabled. Disabling iConomy");
 			yml.setProperty("config.iconomy.enabled", false);
 			yml.setProperty("config.iconomy.couponcost.enabled", false);

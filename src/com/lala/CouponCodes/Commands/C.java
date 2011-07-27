@@ -27,7 +27,6 @@ public class C implements CommandExecutor {
 			return true;
 		}
 		if (args.length == 0){
-			// Without this typing /c will get an internal error :O
 			help((Player) sender);
 			return true;
 		}

@@ -9,12 +9,14 @@ import com.lala.CouponCodes.CouponCodes;
 /**
  * This class is for everything to do with Codes.yml, which stores coupon codes
  */
+
 public class Coupon extends Configuration{
 	public Coupon(File file){
 		super(file);
 	}
 	/**
-	 * This method will get the yml file and return it, makes coding a lot easier
+	 * Returns the yml file of Codes.yml
+	 * @return yml
 	 */
 	private static Coupon getYML(){
 		File d = CouponCodes.data;
@@ -28,13 +30,21 @@ public class Coupon extends Configuration{
 		}
 		return yml;
 	}
+	/**
+	 * Saves all configs
+	 */
 	public static void saveAll(){
-		final Coupon yml = getYML(); // Gets the yml file
-		yml.save(); // Saves it
+		final Coupon yml = getYML();
+		yml.save();
 		return;
 	}
 	/**
-	 * This method will create a coupon code
+	 * Creates a coupon
+	 * @param code
+	 * @param ic
+	 * @param id
+	 * @param amount
+	 * @param canbeused
 	 */
 	public static void create(String code, boolean ic, int id, int amount, int canbeused){
 		final Coupon yml = getYML();
@@ -46,16 +56,20 @@ public class Coupon extends Configuration{
 		return;
 	}
 	/**
-	 * Used for when redeeming so I don't have to type it out everytime
+	 * Redeems a coupon and performs necessary actions to consider it redeemed
+	 * @param code
+	 * @param name
 	 */
 	public static void redeem(String code, String name){		
 		int newnumber = Coupon.getTimesCanBeUsed(code) - 1;
-		Coupon.setTimesCanBeUsed(code, newnumber);
-		Coupon.addUsedPlayer(code, name);
+		setTimesCanBeUsed(code, newnumber);
+		addUsedPlayer(code, name);
 		return;
 	}
 	/**
-	 * Renews a coupon
+	 * Renews a coupon and performs necessary actions to consider is renewed
+	 * @param code
+	 * @param newnumber
 	 */
 	public static void renew(String code, int newnumber){
 		final Coupon yml = getYML();
@@ -65,7 +79,8 @@ public class Coupon extends Configuration{
 		return;
 	}
 	/**
-	 * Removes a coupon
+	 * Removes the given coupon
+	 * @param code
 	 */
 	public static void remove(String code){
 		final Coupon yml = getYML();
@@ -74,7 +89,7 @@ public class Coupon extends Configuration{
 		return;
 	}
 	/**
-	 * Removes all coupons :O
+	 * Removes all coupons
 	 */
 	public static void removeAll(){
 		final Coupon yml = getYML();
@@ -83,86 +98,91 @@ public class Coupon extends Configuration{
 		return;
 	}
 	/**
-	 * Returns the id of the given code
+	 * Returns the ID value of the given code
+	 * @param code
+	 * @return int ID
 	 */
 	public static int getId(String code){
 		final Coupon yml = getYML();
-		int i;
-		i = (Integer) yml.getProperty("config.coupons." + code + ".prize.id");
-		return i;
+		return yml.getInt("config.coupons." + code + ".prize.id", 0);
 	}
 	/**
-	 * Returns the id of the given code
+	 * Returns the amount of the prize of the given code
+	 * @param code
+	 * @return int Amount
 	 */
 	public static int getAmount(String code){
 		final Coupon yml = getYML();
-		int a;
-		a = (Integer) yml.getProperty("config.coupons." + code + ".prize.amount");
-		return a;
+		return yml.getInt("config.coupons." + code + ".prize.amount", 0);
 	}
 	/**
-	 * Gets the times the coupon can be used
-	 * This determines if the coupon is usable and for how much longer
+	 * Returns the amount of times the given coupon can be used
+	 * @param code
+	 * @return int timesCanBeUsed
 	 */
 	public static int getTimesCanBeUsed(String code){
 		final Coupon yml = getYML();
-		int t;
-		t = (Integer) yml.getProperty("config.coupons." + code + ".timescanbeused");
-		return t;
+		return yml.getInt("config.coupons." + code + ".timescanbeused", 0);
 	}
 	/**
-	 * Returns if the coupon is an iConomy coupon
+	 * Returns if the coupon is considered an iConomy coupon
+	 * @param code
+	 * @return boolean isiConomy
 	 */
 	public static boolean isiConomy(String code){
 		final Coupon yml = getYML();
-		boolean m;
-		m = (Boolean) yml.getProperty("config.coupons." + code + ".isiConomy");
-		return m;
+		return yml.getBoolean("config.coupons." + code + ".isiConomy", false);
 	}
 	/**
-	 * Returns if the coupon is used up
+	 * Returns if the given coupon is completely used
+	 * @param code
+	 * @return boolean true
+	 * @return boolean false
 	 */
 	public static boolean isUsed(String code){
 		final Coupon yml = getYML();
-		int u;
-		u = (Integer) yml.getProperty("config.coupons." + code + ".timescanbeused");
-		if (u == 0){
+		if (yml.getInt("config.coupons." + code + ".timescanbeused", 0) <= 0){
 			return true;
 		}else{
 			return false;
 		}
 	}
 	/**
-	 * Returns if a player has already used the coupon
+	 * Returns if the given player has used the given coupon before
+	 * @param code
+	 * @param name
+	 * @return boolean true
+	 * @return boolean false
 	 */
 	public static boolean hasPlayerUsedCoupon(String code, String name){
 		final Coupon yml = getYML();
-		if (PluginConfig.oneuseonly == false){
+		if (!PluginConfig.oneuseonly){
 			return false;
 		}
-		Object o;
-		o = yml.getProperty("config.coupons." + code + ".players." + name);
-		if (o == null){
+		else if (yml.getProperty("config.coupons." + code + ".players." + name) == null){
 			return false;
 		}else{
 			return true;
 		}
 	}
 	/**
-	 * Returns if a coupon exists or not
+	 * Returns if the given coupon exists
+	 * @param code
+	 * @return boolean true
+	 * @return boolean false
 	 */
 	public static boolean exists(String code){
 		final Coupon yml = getYML();
-		Object z;
-		z = yml.getProperty("config.coupons." + code);
-		if (z == null){
+		if (yml.getProperty("config.coupons." + code) == null){
 			return false;
 		}else{
 			return true;
 		}
 	}
 	/**
-	 * Sets the times a coupon can be used
+	 * Sets the amount of times the given coupon can be used
+	 * @param code
+	 * @param newnumber
 	 */
 	public static void setTimesCanBeUsed(String code, int newnumber){
 		final Coupon yml = getYML();
@@ -171,7 +191,9 @@ public class Coupon extends Configuration{
 		return;
 	}
 	/**
-	 * Adds a player to the used list
+	 * Adds the given player to the used list of the given coupon
+	 * @param code
+	 * @param name
 	 */
 	public static void addUsedPlayer(String code, String name){
 		final Coupon yml = getYML();		

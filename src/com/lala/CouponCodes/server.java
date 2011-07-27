@@ -8,6 +8,11 @@ import org.bukkit.plugin.Plugin;
 import com.iConomy.iConomy;
 
 public class server extends ServerListener {
+	
+	/**
+	 * This entire class is for the iConomy API
+	 */
+	
     private CouponCodes plugin;
     public server(CouponCodes plugin) {
         this.plugin = plugin;
