@@ -18,7 +18,7 @@ import com.lala.CouponCodes.Logger.*;
 public class CouponCodes extends JavaPlugin{
 	/**
 	 * @author LaLa
-	 * This is CouponCodes v1.5.3 - Update 1: Major code cleanup
+	 * This is CouponCodes v1.5.3 - Code cleanup which has fixed possible bugs for improperly formatted configs - Updated for CB-1060
 	 */	
 	private final C c = new C(this); // Registers class 'C' for later user
 	public static File data; // Used for datafolder
